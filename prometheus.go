@@ -36,8 +36,8 @@ import (
 // able to export.
 type Exporter struct {
 	opts    Options
-	g       prometheus.Gatherer
-	c       *collector
+	G       prometheus.Gatherer
+	C       *collector
 	handler http.Handler
 }
 
@@ -66,8 +66,8 @@ func NewExporter(o Options) (*Exporter, error) {
 	collector := newCollector(o, o.Registerer)
 	e := &Exporter{
 		opts:    o,
-		g:       o.Gatherer,
-		c:       collector,
+		G:       o.Gatherer,
+		C:       collector,
 		handler: promhttp.HandlerFor(o.Gatherer, promhttp.HandlerOpts{}),
 	}
 	collector.ensureRegisteredOnce()
